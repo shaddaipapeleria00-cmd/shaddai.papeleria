@@ -1,0 +1,156 @@
+{
+  "entities": {
+    "CatalogSettings": {
+      "title": "CatalogSettings",
+      "description": "Store branding, titles, banner, contacts and templates",
+      "type": "object",
+      "properties": {
+        "appName": { "type": "string" },
+        "appTagline": { "type": "string" },
+        "headerBadge": { "type": "string" },
+        "welcomeDescription": { "type": "string" },
+        "bannerType": { "type": "string" },
+        "bannerUrl": { "type": "string" },
+        "businessWhatsApp": { "type": "string" },
+        "businessEmail": { "type": "string" }
+      }
+    },
+    "CategoriesData": {
+      "title": "CategoriesData",
+      "description": "Categories, product categories and material categories",
+      "type": "object",
+      "properties": {
+        "categories": { "type": "array" },
+        "productCategories": { "type": "array" },
+        "materialCategories": { "type": "array" },
+        "variantSuggestions": { "type": "array" }
+      }
+    },
+    "CostSettings": {
+      "title": "CostSettings",
+      "description": "Hourly rate, target salary and overhead expenses",
+      "type": "object",
+      "properties": {
+        "targetMonthlySalary": { "type": "number" },
+        "calculatedHourlyRate": { "type": "number" },
+        "calculatedOverheadPerHour": { "type": "number" }
+      }
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Catalog product with materials and variants",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "category": { "type": "string" },
+        "subcategory": { "type": "string" },
+        "description": { "type": "string" },
+        "images": { "type": "array" },
+        "type": { "type": "string" },
+        "stockQuantity": { "type": "number" },
+        "basePrice": { "type": "number" },
+        "finalPrice": { "type": "number" },
+        "variants": { "type": "array" },
+        "materialsUsed": { "type": "array" },
+        "visibleInCatalog": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "category", "basePrice", "finalPrice"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Order created by customer or admin",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "orderNumber": { "type": "string" },
+        "clientName": { "type": "string" },
+        "clientPhone": { "type": "string" },
+        "totalAmount": { "type": "number" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "orderNumber", "clientName", "totalAmount", "status"]
+    },
+    "Material": {
+      "title": "Material",
+      "description": "Inventory material for costing",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "category": { "type": "string" },
+        "unit": { "type": "string" },
+        "unitCost": { "type": "number" },
+        "currentStock": { "type": "number" }
+      },
+      "required": ["id", "name", "unitCost"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Income or expense financial record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "type": "string" },
+        "amount": { "type": "number" },
+        "date": { "type": "string" }
+      },
+      "required": ["id", "type", "amount", "date"]
+    },
+    "Client": {
+      "title": "Client",
+      "description": "Customer profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "phone": { "type": "string" }
+      },
+      "required": ["id", "name"]
+    },
+    "Supplier": {
+      "title": "Supplier",
+      "description": "Material supplier profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" }
+      },
+      "required": ["id", "name"]
+    }
+  },
+  "firestore": {
+    "/settings/{settingDoc}": {
+      "schema": "CatalogSettings",
+      "description": "Store configuration and categories documents"
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "All catalog products"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "All customer and workshop orders"
+    },
+    "/materials/{materialId}": {
+      "schema": "Material",
+      "description": "Workshop materials and inventory"
+    },
+    "/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "Cashflow transactions"
+    },
+    "/clients/{clientId}": {
+      "schema": "Client",
+      "description": "Registered clients"
+    },
+    "/suppliers/{supplierId}": {
+      "schema": "Supplier",
+      "description": "Suppliers directory"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Application settings (catalog branding, banners, categories, cost engine)
+    match /settings/{docId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Products catalog
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Orders placed by customers and managed by store admins
+    match /orders/{orderId} {
+      allow read: if true;
+      allow create, update, delete: if true;
+    }
+
+    // Inventory materials
+    match /materials/{materialId} {
+      allow read, write: if true;
+    }
+
+    // Finances and cash flow
+    match /transactions/{transactionId} {
+      allow read, write: if true;
+    }
+
+    // Clients directory
+    match /clients/{clientId} {
+      allow read, write: if true;
+    }
+
+    // Suppliers directory
+    match /suppliers/{supplierId} {
+      allow read, write: if true;
+    }
+
+    // Test connection document
+    match /test/{docId} {
+      allow read, write: if true;
+    }
+
+    // Catch-all deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
